@@ -11,7 +11,7 @@ function Header () {
                 <Link to="/">
                     <img src={Logo} alt="Bank Logo" />
                 </Link> 
-                <Link to='/SignIn'>
+                <Link to='/login'>
                     <i className="fa-solid fa-circle-user"></i>
                     <p>Sign In</p>
                 </Link>
