@@ -135,8 +135,8 @@ body {
 }
 
 .feature-icon {
-  width: 100px;
-  border: 10px solid #00bc77;
+  width: 6.25rem;
+  border: 0.625rem solid #00bc77;
   border-radius: 50%;
   padding: 1rem;
 }
@@ -205,7 +205,7 @@ body {
 .footer {
   display: flex;
   justify-content: center;
-  border-top: 2px solid #ccc;
+  border-top: 0.125rem solid #ccc;
   padding: 2rem 0 1.5rem;
 }
 
@@ -218,7 +218,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid black;
+  border: 0.063rem solid black;
   background-color: #fff;
   width: 80%;
   margin: 0 auto;
