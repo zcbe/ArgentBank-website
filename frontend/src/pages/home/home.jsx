@@ -4,17 +4,17 @@ import Banner from '../../components/banner.jsx';
 import Item from '../../components/item.jsx';
 import Footer from '../../components/footer.jsx';
 import FeaturesItemData from '../../data/FeaturesItemData.json';
-import iconChat from '../../assets/img/icon-chat.png';
-import iconMoney from '../../assets/img/icon-money.png';
-import iconSecurity from '../../assets/img/icon-security.png';
+import iconChat from '../../assets/icons/icon-chat.webp';
+import iconMoney from '../../assets/icons/icon-money.webp';
+import iconSecurity from '../../assets/icons/icon-security.webp';
 import '../../sass/pages/_home.scss';
 
 
 function Home () {
     const imageData = {
-        "icon-chat.png": iconChat,
-        "icon-money.png": iconMoney,
-        "icon-security.png": iconSecurity
+        "icon-chat.webp": iconChat,
+        "icon-money.webp": iconMoney,
+        "icon-security.webp": iconSecurity
     }
     return (
             <div className='homepage'>

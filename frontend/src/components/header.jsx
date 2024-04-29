@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../assets/img/argentBankLogo.png';
+import Logo from '../assets/images/argentbanklogo.webp';
 import { Link } from 'react-router-dom';
 import '../sass/components/_header.scss';
 
