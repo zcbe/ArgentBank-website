@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../components/header.jsx';
 import User from '../../components/user.jsx';
 import Account from '../../components/account.jsx';
 import Footer from '../../components/footer.jsx';
@@ -9,7 +8,6 @@ import '../../sass/pages/_profile.scss';
 function UserProfile () {
     return (
         <div className='profile-page'>
-            < Header />
             <main className='bg-dark'>
                 < User firstname="Tony" lastname="Jarvis" />
                 {AccountCardData.map((data) => (

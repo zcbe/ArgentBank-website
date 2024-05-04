@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../components/header.jsx';
 import Banner from '../../components/banner.jsx';
 import Item from '../../components/item.jsx';
 import Footer from '../../components/footer.jsx';
@@ -18,7 +17,6 @@ function Home () {
     }
     return (
             <div className='homepage'>
-            <Header />
             <main>
                 <Banner />
                 <section className="features">
