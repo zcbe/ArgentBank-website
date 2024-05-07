@@ -10,7 +10,7 @@ function Form () {
    const [email, setEmail] = useState(''); // État pour l'email.
    const [password, setPassword] = useState(''); // État pour le mot de passe.
    const [rememberMe, setRememberMe] = useState(false); // État pour la case à cocher "se souvenir de moi".
-   const [error, setError] = useState(''); // État pour les erreurs de formulaire.
+   const [errorMessage, setErrorMessage] = useState(''); // État pour les erreurs de formulaire.
    const navigate = useNavigate(); // Fonction de navigation de React Router.
    const dispatch = useDispatch(); // Fonction pour envoyer des actions Redux.
 
@@ -20,13 +20,13 @@ function Form () {
 
        // Validation de l'email.
        if (!isValidEmail(email)) {
-           setError("Invalid email adress");
+           setErrorMessage("Invalid email adress");
            return;
        }
 
        // Validation du mot de passe.
        if (!isValidPassword(password)) {
-           setError("Invalid password");
+           setErrorMessage("Invalid password");
            return;
        }
 
@@ -47,7 +47,8 @@ function Form () {
                dispatch(loginSuccess(token)); // Envoie d'une action Redux pour signaler une connexion réussie.
                navigate('/profile'); // Redirection vers la page de profil.
            } else { // Si la réponse est un échec.
-               dispatch(loginFailed(error)); // Envoie d'une action Redux pour signaler une erreur de connexion.
+                const error ="Incorrect email/password"
+                dispatch(loginFailed(error)); // Envoie d'une action Redux pour signaler une erreur de connexion.
            }
        } catch (error) {
            console.error(error); // Affiche les erreurs dans la console en cas d'erreur lors de la requête.
@@ -88,7 +89,7 @@ function Form () {
                 <button className="sign-in-button">
                     Sign In
                 </button>
-                {error && <p className='error-message'>{error}</p>}
+                {errorMessage && <p className='error-message'>{errorMessage}</p>}
             </form>
         </section>
     )
