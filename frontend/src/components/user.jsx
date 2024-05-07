@@ -8,11 +8,12 @@ function User() { // Définit le composant fonctionnel User
     // Utilise useSelector pour extraire le nom de famille de l'utilisateur à partir de l'état global
     const lastname = useSelector((state) => state.auth.user.lastname);
     const username = useSelector((state) => state.auth.user.username);
-    const [display, setDisplay] = useState(true);
-    const [editUsername, setEditUsername] = useState('');
+    const [display, setDisplay] = useState(true); // État local pour contrôler l'affichage du profil ou du formulaire d'édition
+    const [editUsername, setEditUsername] = useState(''); // État local pour stocker la valeur en cours d'édition du nom d'utilisateur
+
     return (
         <div className="header">
-         { display ? 
+         { display ? // Rendu conditionnel en fonction de la valeur de display
                 <div>
                     <h2>Welcome back 
                         <br />
@@ -30,7 +31,7 @@ function User() { // Définit le composant fonctionnel User
                                 type="text"
                                 id="username"
                                 defaultValue={username} 
-                                onChange={(event) => setEditUsername(event.target.value)}
+                                onChange={(event) => setEditUsername(event.target.value)} // Met à jour l'état local editUsername lorsqu'il y a un changement dans le champ de saisie
                             />
                         </div>
                         <div className="edit-input">
@@ -39,7 +40,7 @@ function User() { // Définit le composant fonctionnel User
                                 type="text"
                                 id="firstname" 
                                 defaultValue={firstname}
-                                disabled={true}
+                                disabled={true} 
                             />
                         </div>
                         <div className="edit-input">
@@ -48,7 +49,7 @@ function User() { // Définit le composant fonctionnel User
                                 type="text"
                                 id="lastname" 
                                 defaultValue={lastname}
-                                disabled={true}
+                                disabled={true} 
                             />
                         </div>
                         <div className="buttons">
