@@ -1,1 +1,14 @@
 .bg-dark {height: auto;}
+
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Utilisation de 100vh pour que la page occupe toute la hauteur de l'écran */
+}
+
+.flexible-content {
+    flex: 1; /* Le contenu principal prend tout l'espace vertical disponible */
+    background: #12002b;
+    padding-bottom: 3rem;
+    padding-top: 3rem;
+}

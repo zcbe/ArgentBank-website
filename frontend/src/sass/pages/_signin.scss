@@ -1,9 +1,16 @@
+.signin-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Utilisation de 100vh pour que la page occupe toute la hauteur de l'écran */
+}
 
-#bg-dark { background: #12002b;
+
+#bg-dark {     flex: 1; /* Le contenu principal prend tout l'espace vertical disponible */
+    background: #12002b;
     min-height: 610px;
     padding-bottom: 3rem;
     padding-top: 3rem;
     @media (max-width: 920px) {min-height: 50px;}
     @media (min-width: 1900px) {min-height: 820px;}
   }
- 
+

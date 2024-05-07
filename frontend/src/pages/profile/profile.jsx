@@ -8,7 +8,7 @@ import '../../sass/pages/_profile.scss';
 function UserProfile () {
     return (
         <div className='profile-page'>
-            <main className='bg-dark'>
+            <main className='flexible-content'>
                 < User firstname="Tony" lastname="Jarvis" />
                 {AccountCardData.map((data) => (
                     <Account 
