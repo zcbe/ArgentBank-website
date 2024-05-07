@@ -5,6 +5,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL"; // Action déclenchée en cas d'échec d
 export const LOGOUT = "LOGOUT"; // Action déclenchée lors de la déconnexion
 export const REMEMBER_ME = "REMEMBER_ME";// Action déclenchée pour se souvenir de l'utilisateur
 export const GET_USERPROFILE = 'GET_USERPROFILE'; // Action déclenchée pour récupérer le profil utilisateur
+export const EDIT_USERNAME = "EDIT_USERNAME"
 
 
 /* USER PROFILE */

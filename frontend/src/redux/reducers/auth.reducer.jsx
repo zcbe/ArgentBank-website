@@ -13,7 +13,7 @@ export const authReducer = (state = initialState, action) => {
             // Retourne un nouvel objet d'état avec les propriétés mises à jour en fonction de l'action LOGIN_SUCCESS
             return {
                 ...state,
-                status: "SUCCEEDED",
+                status: "CONNECTED",
                 isConnected: true,
                 token: action.payload,
                 error: null
@@ -24,6 +24,7 @@ export const authReducer = (state = initialState, action) => {
             // Retourne un nouvel objet d'état avec les informations du profil utilisateur mises à jour
             return {
                 ...state,
+                status: "SUCCEEDED",
                 user: {
                     ...state.user,
                     firstname: action.payload.firstname,
