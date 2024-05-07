@@ -7,7 +7,6 @@ export const initialState = {
     status: "VOID",
     isConnected: false,
     user: {
-        id: "",
         firstname: "",
         lastname: "",
         username: "",
@@ -19,7 +18,6 @@ export const initialState = {
 // Combine les réducteurs en un seul réducteur racine
 const rootReducer = combineReducers({
    auth: authReducer,
-   // user: userReducer, // Si nécessaire, décommentez et ajoutez le réducteur userReducer ici
 })
 
 // Configure le magasin Redux avec le réducteur racine et les outils de développement activés

@@ -2,7 +2,7 @@
 import { initialState } from "../store";
 
 // Importe les types d'actions depuis un fichier qui contient les définitions des types d'actions utilisés dans l'application
-import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "../actions/type.actions";
+import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, GET_USERPROFILE } from "../actions/type.actions";
 
 // Définit un réducteur (authReducer) responsable de gérer l'état lié à l'authentification
 export const authReducer = (state = initialState, action) => {
@@ -20,6 +20,20 @@ export const authReducer = (state = initialState, action) => {
             };
 
         // Si le type d'action correspond à LOGIN_FAIL, le code suivant est exécuté
+        case GET_USERPROFILE: {
+            // Retourne un nouvel objet d'état avec les informations du profil utilisateur mises à jour
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    firstname: action.payload.firstname,
+                    lastname: action.payload.lastname,
+                    username: action.payload.username
+                }
+            }
+        }
+
+
         case LOGIN_FAIL: {
             // Retourne un nouvel objet d'état avec les propriétés mises à jour en fonction de l'action LOGIN_FAIL
             return {
