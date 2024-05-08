@@ -2,21 +2,30 @@
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; // Importe la fonction useSelector de Redux pour accéder à l'état global
+import { updateUsername } from '../redux/actions/user.actions.jsx';
+import { isValidName } from "../utils/regex.jsx";
 import '../sass/components/_UserProfile.scss';
 
 function User() { // Définit le composant fonctionnel User
     const token = useSelector((state) => state.auth.token);
     // Utilise useSelector pour extraire le prénom de l'utilisateur à partir de l'état global
-    const firstname = useSelector((state) => state.auth.user.firstname);
+    const firstname = useSelector((state) => state.user.firstname);
     // Utilise useSelector pour extraire le nom de famille de l'utilisateur à partir de l'état global
-    const lastname = useSelector((state) => state.auth.user.lastname);
-    const username = useSelector((state) => state.auth.user.username);
+    const lastname = useSelector((state) => state.user.lastname);
+    const username = useSelector((state) => state.user.username);
     const [display, setDisplay] = useState(true); // État local pour contrôler l'affichage du profil ou du formulaire d'édition
     const [userName, setUserName] = useState('');  // État local pour stocker la valeur en cours d'édition du nom d'utilisateur
+    const [errorMessage, setErrorMessage] = useState('');
     const dispatch = useDispatch(); // Crée une fonction dispatch pour envoyer des actions à Redux
 
     const handleSubmitUsername = async (event) => { // Fonction pour gérer la soumission du nom d'utilisateur modifié
         event.preventDefault();  // Empêche le comportement par défaut du formulaire de recharge de la page
+        if (!isValidName(userName)) {
+            setErrorMessage("Invalid username");
+            return;
+        } else {
+            setErrorMessage("");
+        }
         try {
             const response = await fetch('http://localhost:3001/api/v1/user/profile', { // Effectue une requête HTTP PUT pour mettre à jour le profil utilisateur
                 method: 'PUT',
@@ -28,11 +37,10 @@ function User() { // Définit le composant fonctionnel User
             });
             if (response.ok) { // Vérifie si la réponse de la requête est réussie
                 const data = await response.json(); // Récupère les données renvoyées par la requête
+                const username = data.body.userName;
                 console.log(data); // Affiche les données dans la console
-                dispatch({ // Dispatch une action Redux pour mettre à jour le nom d'utilisateur dans le store global
-                    type: 'EDIT_USERNAME',
-                    payload: {username: data.body.userName}, // Payload contenant le nouveau nom d'utilisateur
-                });
+                dispatch(updateUsername(username));
+                setDisplay(!display);
             } else {
                 console.log("Invalid Fields") // Affiche un message d'erreur si les champs sont invalides
             }
@@ -61,7 +69,7 @@ function User() { // Définit le composant fonctionnel User
                             <input
                                 type="text"
                                 id="username"
-                                defaultValue={username} 
+                                defaultValue={username}
                                 onChange={(event) => setUserName(event.target.value)} // Met à jour l'état local userName lorsqu'il y a un changement dans le champ de saisie
                             />
                         </div>
@@ -84,9 +92,11 @@ function User() { // Définit le composant fonctionnel User
                             />
                         </div>
                         <div className="buttons">
-                            <button className="edit-username-button">Save</button>
                             <button className="edit-username-button" onClick={handleSubmitUsername}>Save</button>
+                            <button className="edit-username-button">Cancel</button>
                         </div>
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
                     </form>
                 </div>
             }

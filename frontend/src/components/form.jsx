@@ -5,8 +5,8 @@
 import React, { useState } from 'react'; //Importe le hook useState de React pour gérer l'état local dans un composant fonctionnel.
 import { useDispatch } from 'react-redux'; //Importe le hook useDispatch de Redux pour envoyer des actions au store Redux.
 import { useNavigate } from 'react-router-dom'; //Importe le hook useNavigate de React Router pour la navigation programmée.
-import { loginFailed, loginSuccess } from '../redux/actions/auth.actions';
-import { isValidEmail, isValidPassword } from '../utils/regex';
+import { loginFailed, loginSuccess } from '../redux/actions/auth.actions.jsx';
+import { isValidEmail, isValidPassword } from '../utils/regex.jsx';
 import '../sass/components/_form.scss';
 
 function Form () {
@@ -47,8 +47,13 @@ function Form () {
            // Traitement de la réponse du serveur.
            if (response.ok) { // Si la réponse est réussie (statut 200).
                const data = await response.json(); // Extraction des données JSON de la réponse.
+               console.log(data)
                const token = data.body.token; // Récupération du jeton d'authentification.
                dispatch(loginSuccess(token)); // Envoie d'une action Redux pour signaler une connexion réussie.
+               sessionStorage.setItem("token", token);
+               if (rememberMe) {
+                   localStorage.setItem("token", token);
+               }
                navigate('/profile'); // Redirection vers la page de profil.
            } else { // Si la réponse est un échec.
                 const error ="Incorrect email/password"

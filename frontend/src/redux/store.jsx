@@ -1,23 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'; // Importe la fonction configureStore de Redux Toolkit pour configurer le magasin Redux
-import { combineReducers } from '@reduxjs/toolkit';// Importe la fonction combineReducers de Redux Toolkit pour combiner plusieurs réducteurs en un seul
+import { configureStore , combineReducers} from '@reduxjs/toolkit'; // Importe la fonction configureStore de Redux Toolkit pour configurer le magasin Redux Importe la fonction combineReducers de Redux Toolkit pour combiner plusieurs réducteurs en un seul
 import { authReducer } from './reducers/auth.reducer.jsx';
 
-// Définition d'un objet initialState représentant l'état initial de l'application, pour le système d'autentification
-export const initialState = {
-    status: "VOID",
-    isConnected: false,
-    user: {
-        firstname: "",
-        lastname: "",
-        username: "",
-    },
-    token: "",
-    error: null
-}
+import { userReducer } from './reducers/user.reducer.jsx';
 
 // Combine les réducteurs en un seul réducteur racine
 const rootReducer = combineReducers({
-   auth: authReducer,
+    auth: authReducer,
+    user: userReducer
 })
 
 // Configure le magasin Redux avec le réducteur racine et les outils de développement activés

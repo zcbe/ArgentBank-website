@@ -9,8 +9,8 @@ import { logout } from '../redux/actions/auth.actions';
 import '../sass/components/_header.scss';
 
 function Header() {
-    const firstname = useSelector((state) => state.auth.user.firstname); // Récupère le prénom de l'utilisateur
-    const isConnected = useSelector((state) => state.auth.isConnected); // Récupère le statut d'authentification
+    const isConnected = useSelector((state) => state.auth.token);
+    const firstname = useSelector((state) => state.user.firstname);
 
     const dispatch = useDispatch(); // Initialise useDispatch pour déclencher des actions Redux
     const navigate = useNavigate(); // Initialise useNavigate pour la navigation
@@ -34,7 +34,7 @@ function Header() {
                 </Link> 
                 {isConnected ? ( 
                     <div className='connected'> {/* Condition : affichage différent selon l'état de connexion */}
-                        <Link to='/Profile'>
+                        <Link to='/profile'>
                             <i className='fa-solid fa-2x fa-circle-user' />
                             <p>{firstname}</p>
                         </Link>

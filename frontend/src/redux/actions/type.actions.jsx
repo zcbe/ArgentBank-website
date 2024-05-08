@@ -8,9 +8,9 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"; // Action déclenchée en cas de connexion réussie
 export const LOGIN_FAIL = "LOGIN_FAIL"; // Action déclenchée en cas d'échec de connexion
 export const LOGOUT = "LOGOUT"; // Action déclenchée lors de la déconnexion
-export const REMEMBER_ME = "REMEMBER_ME";// Action déclenchée pour se souvenir de l'utilisateur
-export const GET_USERPROFILE = 'GET_USERPROFILE'; // Action déclenchée pour récupérer le profil utilisateur
-export const EDIT_USERNAME = "EDIT_USERNAME"
-
+export const TOKEN_KEY = "TOKEN_KEY";
 
 /* USER PROFILE */
+
+export const GET_USERPROFILE = "GET_USERPROFILE"
+export const EDIT_USERNAME = "EDIT_USERNAME"
