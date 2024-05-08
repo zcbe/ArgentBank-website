@@ -1,3 +1,5 @@
+// Ces acions sont utilisées pour déclencher des changements dans le store Redux
+
 // Importe les types d'actions 
 import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "./type.actions";
 

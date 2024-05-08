@@ -1,3 +1,5 @@
+// Composant qi repsente la page d'accueil avec une banniere affichant différentes fonctionnalités à l'aide du composant Item, les donnés sont extraites d'n fichier JSON
+
 import React from 'react';
 import Banner from '../../components/banner.jsx';
 import Item from '../../components/item.jsx';

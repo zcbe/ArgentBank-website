@@ -1,3 +1,7 @@
+// Composant qui represente la page de profil de l'utilisateur, avec des informations de profil affichées à l'aide du composant User,
+// et des cartes d'utilisateur affichées à l'aide du compposant Account. 
+//Les données du profil utilisateur sont récupérées à partir d'une API backend et stockées dans le store Redux pour une gestion centralisée de l'état.
+
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';

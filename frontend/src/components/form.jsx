@@ -1,3 +1,7 @@
+// Composant qui repsente le formulaire de connexion avec des fonctionnalités de validation des champs de communication 
+//avec un serveur pour l'authentification, en utilisant Redux pour la gestion de l'état global et React router pour la navigation 
+
+
 import React, { useState } from 'react'; //Importe le hook useState de React pour gérer l'état local dans un composant fonctionnel.
 import { useDispatch } from 'react-redux'; //Importe le hook useDispatch de Redux pour envoyer des actions au store Redux.
 import { useNavigate } from 'react-router-dom'; //Importe le hook useNavigate de React Router pour la navigation programmée.

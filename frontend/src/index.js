@@ -1,3 +1,5 @@
+//initialise l'application React, configure le store Redux, active le router de React Router et rend le composant racine 'App" dans le DOM en utilisant le mode strit de React.
+
 import React from 'react'; 
 import ReactDOM from 'react-dom/client'; // Importation de la méthode ReactDOM.createRoot()
 import { BrowserRouter } from 'react-router-dom';

@@ -1,3 +1,4 @@
+// Composant qui affiche une bannière avec des sous titres 
 import React from 'react';
 import '../sass/components/_banner.scss';
 

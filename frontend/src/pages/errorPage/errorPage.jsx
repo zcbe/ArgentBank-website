@@ -1,3 +1,5 @@
+// Composant qui affiche une page d'erreur 404 avec un message et un lien pour retourner à la page d'accueil 
+
 import React from "react";
 import { Link } from "react-router-dom";
 import Footer from "../../components/footer";

@@ -1,3 +1,5 @@
+// Composant qui repsente le pied de page
+
 import React from "react";
 import '../sass/components/_footer.scss';
 

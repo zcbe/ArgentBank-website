@@ -1,3 +1,5 @@
+// Composant qui permet à l'utilisateur de consulter et de modifier ses informations de profil en utilisant Redux pour la gestion de l'état global et des hooks React pour la gestion des états locaux 
+
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; // Importe la fonction useSelector de Redux pour accéder à l'état global
 import '../sass/components/_UserProfile.scss';

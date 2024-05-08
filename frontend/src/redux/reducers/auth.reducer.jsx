@@ -1,3 +1,5 @@
+//Reducers est utilisé dans le store Redux de l'application pour gérer les mises à jour de l'état d'authentification en réponse aux actions dispatch.
+
 // Importe l'état initial de l'application depuis le fichier store
 import { initialState } from "../store";
 

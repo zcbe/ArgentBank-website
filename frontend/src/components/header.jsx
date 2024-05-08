@@ -1,3 +1,6 @@
+// Composant qui  gère l'en-tête du site en affichant le logo de la banque et en fournissant des liens pour se connecter et se déconnecter, 
+//en fonction de l'état d'authentification de l'utilisateur, tout en utilisant Redux pour la gestion de l'état global et React Router pour la navigation.
+
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
