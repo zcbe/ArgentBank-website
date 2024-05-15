@@ -1,8 +1,7 @@
-// Composant qui représente un compte avec un titre, un montant, et une description 
-
 import React from 'react'
 import '../sass/components/_account.scss';
 
+// Composant qui représente un compte avec un titre, un montant, et une description 
 function Account ({ title, amount, description}) {
     return (
         <section className='account'>

@@ -8,7 +8,6 @@
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"; // Action déclenchée en cas de connexion réussie
 export const LOGIN_FAIL = "LOGIN_FAIL"; // Action déclenchée en cas d'échec de connexion
 export const LOGOUT = "LOGOUT"; // Action déclenchée lors de la déconnexion
-export const TOKEN_KEY = "TOKEN_KEY";
 
 /* USER PROFILE */
 

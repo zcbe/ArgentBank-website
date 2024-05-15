@@ -1,12 +1,12 @@
-// Composant qui repsente le formulaire de connexion avec des fonctionnalités de validation des champs de communication 
+// Composant qui represente  le formulaire de connexion avec des fonctionnalités de validation des champs de communication 
 //avec un serveur pour l'authentification, en utilisant Redux pour la gestion de l'état global et React router pour la navigation 
 
 
 import React, { useState } from 'react'; //Importe le hook useState de React pour gérer l'état local dans un composant fonctionnel.
 import { useDispatch } from 'react-redux'; //Importe le hook useDispatch de Redux pour envoyer des actions au store Redux.
 import { useNavigate } from 'react-router-dom'; //Importe le hook useNavigate de React Router pour la navigation programmée.
-import { loginFailed, loginSuccess } from '../redux/actions/auth.actions.jsx';
-import { isValidEmail, isValidPassword } from '../utils/regex.jsx';
+import { loginFailed, loginSuccess } from '../redux/actions/auth.actions.jsx'; // Importe les actions Redux pour la gestion de l'authentification.
+import { isValidEmail, isValidPassword } from '../utils/regex.jsx';  // Importe les fonctions de validation des emails et mots de passe.
 import '../sass/components/_form.scss';
 
 function Form () {
@@ -25,12 +25,14 @@ function Form () {
        // Validation de l'email.
        if (!isValidEmail(email)) {
            setErrorMessage("Invalid email adress");
+           console.log("Error message updated:", "Invalid email address");
            return;
        }
 
        // Validation du mot de passe.
        if (!isValidPassword(password)) {
            setErrorMessage("Invalid password");
+           console.log("Error message updated:", "Invalid password");
            return;
        }
 
@@ -105,5 +107,3 @@ function Form () {
 }
 
 export default Form
-
-

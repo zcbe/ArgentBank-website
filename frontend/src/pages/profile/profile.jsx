@@ -33,6 +33,7 @@ function UserProfile () {
                         const firstname = data.body.firstName;
                         const lastname = data.body.lastName;
                         const username = data.body.userName;
+                        // Met à jour le profil utilisateur dans le store Redux
                         dispatch(userProfile(firstname, lastname, username));
                     } else {
                         console.log("error while retrieving profile"); // Affichage d'un message d'erreur si la requête échoue

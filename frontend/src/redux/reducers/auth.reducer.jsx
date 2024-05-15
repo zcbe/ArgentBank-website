@@ -2,11 +2,12 @@
 
 import { LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from "../actions/type.actions";
 
+// État initial du reducer authentification
 const initialState = {
-  status: "VOID",
-  isConnected: false,
-  token: null,
-  error: null,
+  status: "VOID", // État de la connexion ("VOID" = vide par défaut)
+  isConnected: false, // Statut de connexion initial (déconnecté par défaut)
+  token: null, // Jeton d'authentification initial (null par défaut)
+  error: null, // Erreur de connexion initial (null par défaut)
 }
 
 // Définit un réducteur (authReducer) responsable de gérer l'état lié à l'authentification
