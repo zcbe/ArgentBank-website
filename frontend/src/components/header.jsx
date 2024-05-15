@@ -10,7 +10,7 @@ import '../sass/components/_header.scss';
 
 function Header() {
     const isConnected = useSelector((state) => state.auth.token); // Utilise le hook useSelector pour extraire le jeton d'authentification du store Redux.
-    const firstname = useSelector((state) => state.user.firstname); // Utilise le hook useSelector pour extraire le prénom de l'utilisateur du store Redux.
+    const firstname = useSelector((state) => state.user.userData.firstname);  // Utilise le hook useSelector pour extraire le prénom de l'utilisateur du store Redux.
 
 
     const dispatch = useDispatch(); // Initialise useDispatch pour déclencher des actions Redux

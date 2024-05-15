@@ -30,11 +30,18 @@ function UserProfile () {
                     if (response.ok) { // Vérification si la requête s'est déroulée avec succès
                         const data = await response.json(); // Conversion de la réponse en JSON
                         console.log(data);
-                        const firstname = data.body.firstName;
-                        const lastname = data.body.lastName;
-                        const username = data.body.userName;
+                        // Création d'un objet userData à partir des données reçues
+                        const userData = {
+                            createdAt: data.body.createdAt,
+                            updatedAt: data.body.updatedAt,
+                            id: data.body.id,
+                            email: data.body.email,
+                            firstname: data.body.firstName,
+                            lastname: data.body.lastName,
+                            username: data.body.userName
+                        }
                         // Met à jour le profil utilisateur dans le store Redux
-                        dispatch(userProfile(firstname, lastname, username));
+                        dispatch(userProfile(userData));
                     } else {
                         console.log("error while retrieving profile"); // Affichage d'un message d'erreur si la requête échoue
                     }

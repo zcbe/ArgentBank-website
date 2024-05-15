@@ -8,9 +8,8 @@ import '../sass/components/_UserProfile.scss';
 
 function User() { // Définit le composant fonctionnel User
     const token = useSelector((state) => state.auth.token);    // Utilise useSelector pour extraire le jeton d'authentification du store Redux
-    const firstname = useSelector((state) => state.user.firstname);     // Utilise useSelector pour extraire le prénom de l'utilisateur à partir de l'état global
-    const lastname = useSelector((state) => state.user.lastname);     // Utilise useSelector pour extraire le nom de famille de l'utilisateur à partir de l'état global
-    const username = useSelector((state) => state.user.username);     // Utilise useSelector pour extraire le nom d'utilisateur de l'utilisateur à partir de l'état global
+    const userData = useSelector((state) => state.user.userData);     // Utilise useSelector pour extraire les données utilisateur du store Redux
+
     const [display, setDisplay] = useState(true); // État local pour contrôler l'affichage du profil ou du formulaire d'édition
     const [userName, setUserName] = useState('');  // État local pour stocker la valeur en cours d'édition du nom d'utilisateur
     const [errorMessage, setErrorMessage] = useState('');
@@ -74,7 +73,7 @@ function User() { // Définit le composant fonctionnel User
                 <div>
                     <h2>Welcome back 
                         <br />
-                        {firstname} {lastname} !
+                        {userData.firstname} {userData.lastname} !
                     </h2>
                     <button className="edit-button" onClick={() => setDisplay(!display)}>Edit Name</button>
                 </div>
@@ -87,7 +86,7 @@ function User() { // Définit le composant fonctionnel User
                             <input
                                 type="text"
                                 id="username"
-                                defaultValue={username}
+                                defaultValue={userData.username}
                                 onChange={(event) => setUserName(event.target.value)} // Met à jour l'état local userName lorsqu'il y a un changement dans le champ de saisie
                             />
                         </div>
@@ -96,7 +95,7 @@ function User() { // Définit le composant fonctionnel User
                             <input
                                 type="text"
                                 id="firstname" 
-                                defaultValue={firstname}
+                                defaultValue={userData.firstname}
                                 disabled={true} 
                             />
                         </div>
@@ -105,7 +104,7 @@ function User() { // Définit le composant fonctionnel User
                             <input
                                 type="text"
                                 id="lastname" 
-                                defaultValue={lastname}
+                                defaultValue={userData.lastname}
                                 disabled={true} 
                             />
                         </div>

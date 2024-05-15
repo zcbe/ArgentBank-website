@@ -3,9 +3,7 @@ import { GET_USERPROFILE, EDIT_USERNAME, LOGOUT } from "../actions/type.actions"
 // État initial du reducer utilisateur
 const initialState = {
     status: "VOID", // État de la requête (initialisé à "VOID" par défaut)
-    firstname: null, // Prénom de l'utilisateur (null par défaut)
-    lastname: null, // Nom de famille de l'utilisateur (null par défaut)
-    username: null // Nom d'utilisateur (null par défaut)
+    userData: {} // Les données du profil utilisateur sont initialement vides
 }
 
 // Reducer pour gérer les actions liées à l'utilisateur
@@ -15,16 +13,16 @@ export const userReducer = (state = initialState, action ) => {
             return {
                 ...state,
                 status: "SUCCEEDED", // Met à jour le statut de la requête à "SUCCEEDED"
-                firstname: action.payload.firstname, // Met à jour le prénom de l'utilisateur avec les données du payload
-                lastname: action.payload.lastname, // Met à jour le nom de famille de l'utilisateur avec les données du payload
-                username: action.payload.username // Met à jour le nom d'utilisateur avec les données du payload
+                userData: action.payload // Met à jour les données du profil utilisateur avec les données reçues dans l'action payload
             }
         case EDIT_USERNAME: // Action pour éditer le nom d'utilisateur
             return {
                 ...state,
                 status: "MODIFIED", // Met à jour le statut de la requête à "MODIFIED"
-                username: action.payload // Met à jour le nom d'utilisateur avec les données du payload
-            }
+                userData: {
+                    ...state.userData,
+                    username: action.payload // Met à jour le nom d'utilisateur avec la valeur reçue dans l'action payload
+                }             }
         case LOGOUT: // Action pour déconnecter l'utilisateur
             return initialState; // Réinitialise l'état de l'utilisateur à l'état initial
         default:
