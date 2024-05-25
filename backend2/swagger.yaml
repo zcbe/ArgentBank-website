@@ -60,16 +60,14 @@ paths:
   /user/profile:
     post:
       security:
-        - Bearer: []
+        - Bearer: []  # Utilise l'authentification Bearer pour sécuriser l'endpoint
       tags:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -78,7 +76,7 @@ paths:
           description: Internal Server Error
     put:
       security:
-        - Bearer: []
+        - Bearer: []  # Utilise l'authentification Bearer pour sécuriser l'endpoint
       tags:
         - User Module
       summary: User Profile API
@@ -94,11 +92,142 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successully
+          description: User profile retrieved successfully
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
           description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /transactions:  # Nouvel endpoint pour la gestion des transactions
+    get:
+      security:
+        - Bearer: []  # Utilise l'authentification Bearer pour sécuriser l'endpoint
+      tags:
+        - Transactions
+      summary: Get all transactions for the current month, grouped by account
+      description: API to retrieve all transactions for the current month, grouped by account
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transactions retrieved successfully
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    post:
+      security:
+        - Bearer: []  # Utilise l'authentification Bearer pour sécuriser l'endpoint
+      tags:
+        - Transactions
+      summary: Add a new transaction
+      description: API to add a new transaction (modifies existing transaction information)
+      parameters:
+        - in: body
+          name: body
+          description: Transaction Payload
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction added successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /transactions/{transactionId}:  # Endpoint pour une transaction spécifique
+    get:
+      security:
+        - Bearer: []  # Utilise l'authentification Bearer pour sécuriser l'endpoint
+      tags:
+        - Transactions
+      summary: Get details of a specific transaction
+      description: API to retrieve details of a specific transaction
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID of the transaction to retrieve
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction details retrieved successfully
+          schema:
+            $ref: '#/definitions/Transaction'
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    put:
+      security:
+        - Bearer: []  # Utilise l'authentification Bearer pour sécuriser l'endpoint
+      tags:
+        - Transactions
+      summary: Update transaction information
+      description: API to update information of a specific transaction
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID of the transaction to update
+        - in: body
+          name: body
+          description: Updated transaction information
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction updated successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []  # Utilise l'authentification Bearer pour sécuriser l'endpoint
+      tags:
+        - Transactions
+      summary: Delete transaction information
+      description: API to delete information of a specific transaction
+      parameters:
+        - name: transactionId
+          in: path
+          required: true
+          type: string
+          description: ID of the transaction to delete
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transaction deleted successfully
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '404':
+          description: Transaction not found
         '500':
           description: Internal Server Error
 securityDefinitions:
@@ -122,8 +251,19 @@ definitions:
         type: string
         description: user last name
       userName:
+        type: string  # Corrected this line to set the type to string
+        description: user username
+  UserProfile:
+    properties:
+      firstName:
         type: string
-        description: user public name
+        description: user first name
+      lastName:
+        type: string
+        description: user last name
+      userName:
+        type: string
+        description: user username
   Login:
     properties:
       email:
@@ -132,27 +272,36 @@ definitions:
       password:
         type: string
         description: user password
-  ApiResponse:
-    type: object
-    properties:
-      status:
-        type: integer
-      message:
-        type: string
-      body:
-        type: object
-        properties:
-          id:
-            type: string
-          email:
-            type: string
   LoginResponse:
-    type: object
     properties:
       token:
         type: string
-  UserProfile:
-    type: object
+        description: authentication token
+      user:
+        $ref: '#/definitions/UserProfile'
+  ApiResponse:
     properties:
-      userName:
+      message:
         type: string
+        description: response message
+      data:
+        type: object
+        description: additional data
+  Transaction:
+    properties:
+      id:
+        type: string
+        description: transaction ID
+      amount:
+        type: number
+        description: transaction amount
+      date:
+        type: string
+        format: date-time
+        description: transaction date
+      description:
+        type: string
+        description: transaction description
+      accountId:
+        type: string
+        description: account ID related to the transaction
