@@ -1,19 +1,17 @@
-import { configureStore , combineReducers} from '@reduxjs/toolkit'; // Importe la fonction configureStore de Redux Toolkit pour configurer le magasin Redux Importe la fonction combineReducers de Redux Toolkit pour combiner plusieurs réducteurs en un seul
-import { authReducer } from './reducers/auth.reducer.jsx';
+// Importe la fonction configureStore de Redux Toolkit pour configurer le store Redux
+import { configureStore } from '@reduxjs/toolkit';
 
-import { userReducer } from './reducers/user.reducer.jsx';
+// Importe les réducteurs (reducers) du slice d'authentification et du slice utilisateur
+import authReducer from './slices/authSlice';
+import userReducer from './slices/userSlice';
 
-// Combine les réducteurs en un seul réducteur racine
-const rootReducer = combineReducers({
-    auth: authReducer, // Réducteur pour gérer l'authentification
-    user: userReducer // Réducteur pour gérer l'utilisateur
-})
-
-// Configure le magasin Redux avec le réducteur racine et les outils de développement activés
+// Configure le store Redux avec les réducteurs d'authentification et d'utilisateur
 const store = configureStore({
-    reducer: rootReducer, // Utilise le réducteur racine combinant tous les réducteurs
-    devTools: true  // Active les outils de développement Redux
-})
+  reducer: {
+    auth: authReducer, // Utilise le réducteur d'authentification pour gérer l'état d'authentification dans le store sous la clé 'auth'
+    user: userReducer, // Utilise le réducteur utilisateur pour gérer l'état utilisateur dans le store sous la clé 'user'
+  },
+});
 
-// Exporte le magasin configuré par défaut pour être utilisé dans d'autres parties de l'application
-export default store
+// Exporte le store configuré
+export default store;

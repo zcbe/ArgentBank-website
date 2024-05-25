@@ -5,7 +5,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { userProfile } from '../../redux/actions/user.actions.jsx';
+import { userProfile } from '../../redux/slices/userSlice.js';
 import User from '../../components/user.jsx';
 import Account from '../../components/account.jsx';
 import Footer from '../../components/footer.jsx';

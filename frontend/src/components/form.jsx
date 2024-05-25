@@ -5,8 +5,8 @@
 import React, { useState } from 'react'; //Importe le hook useState de React pour gérer l'état local dans un composant fonctionnel.
 import { useDispatch } from 'react-redux'; //Importe le hook useDispatch de Redux pour envoyer des actions au store Redux.
 import { useNavigate } from 'react-router-dom'; //Importe le hook useNavigate de React Router pour la navigation programmée.
-import { loginFailed, loginSuccess } from '../redux/actions/auth.actions.jsx'; // Importe les actions Redux pour la gestion de l'authentification.
-import { isValidEmail, isValidPassword } from '../utils/regex.jsx';  // Importe les fonctions de validation des emails et mots de passe.
+import { loginFailed, loginSuccess } from '../redux/slices/authSlice.js'; // Importe les actions Redux pour la gestion de l'authentification.
+import { isValidEmail, isValidPassword } from '../utils/regex.js';  // Importe les fonctions de validation des emails et mots de passe.
 import '../sass/components/_form.scss';
 
 function Form () {

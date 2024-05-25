@@ -5,7 +5,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/images/argentbanklogo.webp';
-import { logout } from '../redux/actions/auth.actions';
+import { logout } from '../redux/slices/authSlice.js';
 import '../sass/components/_header.scss';
 
 function Header() {

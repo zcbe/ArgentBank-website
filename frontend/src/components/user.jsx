@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux"; // Importe la fonction useSelector de Redux pour accéder à l'état global
-import { updateUsername } from '../redux/actions/user.actions.jsx';
-import { isValidName } from "../utils/regex.jsx";
+import { updateUsername } from '../redux/slices/userSlice.js';
+import { isValidName } from "../utils/regex.js";
 import '../sass/components/_UserProfile.scss';
 
 function User() { // Définit le composant fonctionnel User
@@ -15,10 +15,6 @@ function User() { // Définit le composant fonctionnel User
     const [errorMessage, setErrorMessage] = useState('');
     const dispatch = useDispatch(); // Crée une fonction dispatch pour envoyer des actions à Redux
 
-    const handleChange = (event) => {
-        console.log(event.target.value); // Vérifie la valeur saisie
-        setUserName(event.target.value);
-    }
     
 
     const handleSubmitUsername = async (event) => { // Fonction pour gérer la soumission du nom d'utilisateur modifié
