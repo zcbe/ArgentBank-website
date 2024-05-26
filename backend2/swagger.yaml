@@ -92,7 +92,7 @@ paths:
         - application/json
       responses:
         '200':
-          description: User profile retrieved successfully
+          description: User profile updated successfully  # Correction du message de description
           schema:
             $ref: '#/definitions/ApiResponse'
         '400':
@@ -251,7 +251,7 @@ definitions:
         type: string
         description: user last name
       userName:
-        type: string  # Corrected this line to set the type to string
+        type: string  # Correction du type à string
         description: user username
   UserProfile:
     properties:
@@ -278,7 +278,7 @@ definitions:
         type: string
         description: authentication token
       user:
-        $ref: '#/definitions/UserProfile'
+        $ref: '#/definitions/UserProfile'  # Ajout de la référence au profil utilisateur dans la réponse de login
   ApiResponse:
     properties:
       message:
