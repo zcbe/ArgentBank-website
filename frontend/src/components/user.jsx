@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"; // Importe la fonction useSelector de Redux pour accéder à l'état global
-import { updateUsername } from '../redux/slices/userSlice.js';
-import { isValidName } from "../utils/regex.js";
-import '../sass/components/_UserProfile.scss';
+import { useDispatch, useSelector } from "react-redux";
+import { updateUsername } from '../redux/slices/userSlice.js'; // Import de l'action updateUsername
+import { isValidName } from "../utils/regex.js"; // Import de la fonction isValidName pour la validation du nom d'utilisateur
+import '../sass/components/_UserProfile.scss'; // Import des styles CSS
 
-function User() { // Définit le composant fonctionnel User
-    const token = useSelector((state) => state.auth.token);    // Utilise useSelector pour extraire le jeton d'authentification du store Redux
-    const userData = useSelector((state) => state.user.userData);     // Utilise useSelector pour extraire les données utilisateur du store Redux
+function User() {
+    // Utilisation des hooks useSelector et useDispatch pour accéder au state et dispatcher des actions Redux
+    const token = useSelector((state) => state.auth.token); // Récupération du token d'authentification
+    const userData = useSelector((state) => state.user.userData); // Récupération des données utilisateur
 
-    const [display, setDisplay] = useState(true); // État local pour contrôler l'affichage du profil ou du formulaire d'édition
-    const [userName, setUserName] = useState(userData.username || '');  // État local pour stocker la valeur en cours d'édition du nom d'utilisateur
-    const [errorMessage, setErrorMessage] = useState('');
-    const dispatch = useDispatch(); // Crée une fonction dispatch pour envoyer des actions à Redux
+    // Utilisation de useState pour gérer l'état de l'affichage et du nom d'utilisateur
+    const [display, setDisplay] = useState(true); // État de l'affichage du formulaire de modification
+    const [userName, setUserName] = useState(''); // État du nom d'utilisateur
 
+    // Utilisation de useState pour gérer le message d'erreur
+    const [errorMessage, setErrorMessage] = useState(''); // État du message d'erreur
+
+    const dispatch = useDispatch(); // Récupération de la fonction dispatch pour envoyer des actions Redux
+
+    // Utilisation de useEffect pour mettre à jour le nom d'utilisateur à partir du stockage local lors du chargement initial
+    useEffect(() => {
+        const storedUsername = localStorage.getItem(`username_${userData.id}`);
+        if (storedUsername) {
+            setUserName(storedUsername);
+        } else {
+            setUserName(userData.username || '');
+        }
+    }, [userData]);
+
+    // Utilisation de useEffect pour valider le nom d'utilisateur à chaque changement
     useEffect(() => {
         if (!isValidName(userName)) {
             setErrorMessage("Invalid username");
@@ -21,48 +37,49 @@ function User() { // Définit le composant fonctionnel User
         }
     }, [userName]);
 
-    const handleSubmitUsername = async (event) => { // Fonction pour gérer la soumission du nom d'utilisateur modifié
-        event.preventDefault();  // Empêche le comportement par défaut du formulaire de recharge de la page
-        console.log(JSON.stringify({userName})); // Vérifie le format de la requête
-
-        if (errorMessage) return; // Arrête l'exécution de la fonction si le nom d'utilisateur n'est pas valide
+    // Fonction pour gérer la soumission du formulaire de modification du nom d'utilisateur
+    const handleSubmitUsername = async (event) => {
+        event.preventDefault();
+        if (errorMessage) return;
 
         try {
-            const response = await fetch('http://localhost:3001/api/v1/user/profile', { // Effectue une requête HTTP PUT pour mettre à jour le profil utilisateur
+            const response = await fetch('http://localhost:3001/api/v1/user/profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`, // Inclut le token d'authentification dans l'en-tête de la requête
+                    'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({userName}), // Corps de la requête contenant le nouveau nom d'utilisateur
+                body: JSON.stringify({ userName }),
             });
-            if (response.ok) { // Vérifie si la réponse de la requête est réussie
-                const data = await response.json(); // Récupère les données renvoyées par la requête
-                console.log(data); // Vérifie la réponse de la requête
+            if (response.ok) {
+                const data = await response.json();
                 const username = data.body.userName;
-                console.log(data); // Affiche les données dans la console
-                dispatch(updateUsername(username));  // Met à jour le nom d'utilisateur dans le store Redux et change l'affichage pour revenir au profil
-                setDisplay(true);
+                dispatch(updateUsername(username)); // Dispatch de l'action updateUsername avec le nouveau nom d'utilisateur
+                localStorage.setItem(`username_${userData.id}`, username); // Enregistre le nom d'utilisateur dans le stockage local avec une clé unique
+                setDisplay(true); // Réinitialisation de l'affichage à true
             } else {
-                console.log("Invalid Fields") // Affiche un message d'erreur si les champs sont invalides
+                console.log("Invalid Fields");
             }
         } catch (error) {
-            console.error(error); // Gère les erreurs potentielles lors de l'exécution de la requête
+            console.error(error);
         }
     }
-    
+
+    // Fonction pour gérer l'enregistrement des modifications du nom d'utilisateur
     const handleSave = (event) => {
-        event.preventDefault(); // Empêcher le comportement par défaut du formulaire
-        handleSubmitUsername(event); // Enregistrer les modifications du nom d'utilisateur
-    }
-    
-    const handleCancel = () => {
-        setDisplay(true); // Réinitialiser l'affichage pour revenir à l'affichage du profil
+        event.preventDefault();
+        handleSubmitUsername(event);
     }
 
+    // Fonction pour annuler la modification du nom d'utilisateur et réinitialiser l'affichage
+    const handleCancel = () => {
+        setDisplay(true);
+    }
+
+    // Rendu du composant User
     return (
         <div className="header">
-            { display ? // Rendu conditionnel en fonction de la valeur de display
+            { display ?
                 <div>
                     <h2>Welcome back 
                         <br />
@@ -80,7 +97,7 @@ function User() { // Définit le composant fonctionnel User
                                 type="text"
                                 id="username"
                                 value={userName}
-                                onChange={(event) => setUserName(event.target.value)} // Met à jour l'état local userName lorsqu'il y a un changement dans le champ de saisie
+                                onChange={(event) => setUserName(event.target.value)}
                             />
                         </div>
                         <div className="edit-input">
@@ -113,4 +130,4 @@ function User() { // Définit le composant fonctionnel User
     )
 }
 
-export default User
+export default User;
