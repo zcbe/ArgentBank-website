@@ -31,7 +31,7 @@ function Header() {
             <h1 className='sr-only'>Argent Bank</h1> {/* Titre pour les lecteurs d'écran */}
             <nav>
                 <Link to="/">
-                    <img src={Logo} alt="Bank Logo" />
+                    <img src={Logo} width="200" height="55" alt="Bank Logo" />
                 </Link> 
                 {isConnected ? ( 
                     <div className='connected'> {/* Condition : affichage différent selon l'état de connexion */}

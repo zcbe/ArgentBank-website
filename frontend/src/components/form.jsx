@@ -93,7 +93,10 @@ function Form() {
                        id='remember-me'
                        type='checkbox'
                        checked={rememberMe}
-                       onChange={(event) => setRememberMe(event.target.checked)}
+                       onChange={(event) => {
+                        console.log("Remember me checked:", event.target.checked);
+                        setRememberMe(event.target.checked);
+                    }}
                    />
                    <label htmlFor='remember-me'>Remember me</label>
                </div>
