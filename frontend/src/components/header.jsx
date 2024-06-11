@@ -10,7 +10,7 @@ import '../sass/components/_header.scss';
 
 function Header() {
     const isConnected = useSelector((state) => state.auth.token); // Utilise le hook useSelector pour extraire le jeton d'authentification du store Redux.
-    const firstname = useSelector((state) => state.user.userData.firstname);  // Utilise le hook useSelector pour extraire le prénom de l'utilisateur du store Redux.
+    const username = useSelector((state) => state.user.userData.username);  // Utilise le hook useSelector pour extraire le username de l'utilisateur du store Redux.
 
 
     const dispatch = useDispatch(); // Initialise useDispatch pour déclencher des actions Redux
@@ -19,8 +19,6 @@ function Header() {
     // Fonction pour gérer la déconnexion de l'utilisateur
     const logoutHandler = () => {
         dispatch(logout()); // Déclenche l'action de déconnexion
-        sessionStorage.clear(); // Efface les données de session
-        localStorage.clear(); // Efface les données du stockage local
         navigate('/'); // Redirige vers la page d'accueil
     };
 
@@ -37,7 +35,7 @@ function Header() {
                     <div className='connected'> {/* Condition : affichage différent selon l'état de connexion */}
                         <Link to='/profile'>
                             <i className='fa-solid fa-2x fa-circle-user' />
-                            <p>{firstname}</p>
+                            <p>{username}</p>
                         </Link>
                         <Link to='/' onClick={logoutHandler}> {/* Lien pour déclencher la déconnexion */}
                             <i className='fa-solid fa-arrow-right-from-bracket' />
