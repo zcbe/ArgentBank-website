@@ -5,30 +5,27 @@ import { isValidName } from "../utils/regex.js";
 import '../sass/components/_UserProfile.scss'; 
 
 function User() {
-    // Utilisation des hooks useSelector et useDispatch pour accéder au state et dispatcher des actions Redux
-    const token = useSelector((state) => state.auth.token); // Récupération du token d'authentification
-    const userData = useSelector((state) => state.user.userData); // Récupération des données utilisateur
+    const token = useSelector((state) => state.auth.token);
+    const userData = useSelector((state) => state.user.userData);
 
-    // Utilisation de useState pour gérer l'état de l'affichage et du nom d'utilisateur
-    const [display, setDisplay] = useState(true); // État de l'affichage du formulaire de modification
-    const [userName, setUserName] = useState(''); // État du nom d'utilisateur
+    const [display, setDisplay] = useState(true);
+    const [userName, setUserName] = useState('');
+    const [initialUserName, setInitialUserName] = useState(''); // Nouvel état pour le nom d'utilisateur initial
+    const [errorMessage, setErrorMessage] = useState('');
 
-    // Utilisation de useState pour gérer le message d'erreur
-    const [errorMessage, setErrorMessage] = useState(''); // État du message d'erreur
+    const dispatch = useDispatch();
 
-    const dispatch = useDispatch(); // Récupération de la fonction dispatch pour envoyer des actions Redux
-
-    // Utilisation de useEffect pour mettre à jour le nom d'utilisateur à partir du stockage local lors du chargement initial
     useEffect(() => {
         const storedUsername = localStorage.getItem(`username_${userData.id}`);
         if (storedUsername) {
             setUserName(storedUsername);
+            setInitialUserName(storedUsername); // Initialisez également initialUserName
         } else {
             setUserName(userData.username || '');
+            setInitialUserName(userData.username || ''); // Initialisez également initialUserName
         }
     }, [userData]);
 
-    // Utilisation de useEffect pour valider le nom d'utilisateur à chaque changement
     useEffect(() => {
         if (!isValidName(userName)) {
             setErrorMessage("Invalid username");
@@ -37,7 +34,6 @@ function User() {
         }
     }, [userName]);
 
-    // Fonction pour gérer la soumission du formulaire de modification du nom d'utilisateur
     const handleSubmitUsername = async (event) => {
         event.preventDefault();
         if (errorMessage) return;
@@ -54,9 +50,10 @@ function User() {
             if (response.ok) {
                 const data = await response.json();
                 const username = data.body.userName;
-                dispatch(updateUsername(username)); // Dispatch de l'action updateUsername avec le nouveau nom d'utilisateur
-                localStorage.setItem(`username_${userData.id}`, username); // Enregistre le nom d'utilisateur dans le stockage local avec une clé unique
-                setDisplay(true); // Réinitialisation de l'affichage à true
+                dispatch(updateUsername(username));
+                localStorage.setItem(`username_${userData.id}`, username);
+                setInitialUserName(username); // Mettez à jour initialUserName
+                setDisplay(true);
             } else {
                 console.log("Invalid Fields");
             }
@@ -65,18 +62,16 @@ function User() {
         }
     }
 
-    // Fonction pour gérer l'enregistrement des modifications du nom d'utilisateur
     const handleSave = (event) => {
         event.preventDefault();
         handleSubmitUsername(event);
     }
 
-    // Fonction pour annuler la modification du nom d'utilisateur et réinitialiser l'affichage
     const handleCancel = () => {
+        setUserName(initialUserName); // Réinitialisez userName à initialUserName
         setDisplay(true);
     }
 
-    // Rendu du composant User
     return (
         <div className="header">
             { display ?
