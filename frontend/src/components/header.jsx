@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Logo from '../assets/images/argentbanklogo.webp';
 import { logout } from '../redux/slices/authSlice.js';
 import '../sass/components/_header.scss';
@@ -14,19 +14,17 @@ function Header() {
 
 
     const dispatch = useDispatch(); // Initialise useDispatch pour déclencher des actions Redux
-    const navigate = useNavigate(); // Initialise useNavigate pour la navigation
 
     // Fonction pour gérer la déconnexion de l'utilisateur
     const logoutHandler = () => {
         dispatch(logout()); // Déclenche l'action de déconnexion
-        navigate('/'); // Redirige vers la page d'accueil
     };
 
 
 
     return (
         <header>
-            <h1 className='sr-only'>Argent Bank</h1> {/* Titre pour les lecteurs d'écran */}
+            <h1 className='sr-only'>Argent Bank</h1> 
             <nav>
                 <Link to="/">
                     <img src={Logo} width="200" height="55" alt="Bank Logo" />

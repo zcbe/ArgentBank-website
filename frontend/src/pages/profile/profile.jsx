@@ -9,7 +9,7 @@ import { userProfile } from '../../redux/slices/userSlice.js';
 import User from '../../components/user.jsx';
 import Account from '../../components/account.jsx';
 import Footer from '../../components/footer.jsx';
-import AccountCardData from '../../data/AccountCardData.json'; // Import des données des cartes d'utilisateur depuis un fichier JSON
+import AccountCardData from '../../data/AccountCardData.json'; 
 import '../../sass/pages/_profile.scss';
 
 function UserProfile () {

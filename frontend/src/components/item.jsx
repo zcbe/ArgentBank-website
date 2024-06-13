@@ -1,4 +1,4 @@
-// Composant réutilisable et fexible, permettant d'afficher différents élements une image,un titre, une descitpion 
+// Composant permettant d'afficher différents élements une image,un titre, une descitpion 
 
 import React from "react";
 import '../sass/components/_item.scss';

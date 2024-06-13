@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUsername } from '../redux/slices/userSlice.js'; // Import de l'action updateUsername
-import { isValidName } from "../utils/regex.js"; // Import de la fonction isValidName pour la validation du nom d'utilisateur
-import '../sass/components/_UserProfile.scss'; // Import des styles CSS
+import { updateUsername } from '../redux/slices/userSlice.js';
+import { isValidName } from "../utils/regex.js";
+import '../sass/components/_UserProfile.scss'; 
 
 function User() {
     // Utilisation des hooks useSelector et useDispatch pour accéder au state et dispatcher des actions Redux

@@ -1,22 +1,22 @@
-import React, { useState } from 'react'; // Importer le hook useState de React pour gérer l'état local dans un composant fonctionnel.
-import { useDispatch } from 'react-redux'; // Importer le hook useDispatch de Redux pour envoyer des actions au store Redux.
-import { useNavigate } from 'react-router-dom'; // Importer le hook useNavigate de React Router pour la navigation programmée.
-import { loginFailed, loginSuccess } from '../redux/slices/authSlice.js'; // Importer les actions Redux pour la gestion de l'authentification.
-import { isValidEmail, isValidPassword } from '../utils/regex.js';  // Importer les fonctions de validation des emails et mots de passe.
+import React, { useState } from 'react'; 
+import { useDispatch } from 'react-redux'; 
+import { useNavigate } from 'react-router-dom'; 
+import { loginFailed, loginSuccess } from '../redux/slices/authSlice.js'; 
+import { isValidEmail, isValidPassword } from '../utils/regex.js'; 
 import '../sass/components/_form.scss';
 
 function Form() {
    // Définit les états locaux pour le formulaire.
-   const [email, setEmail] = useState(''); // État pour l'email.
-   const [password, setPassword] = useState(''); // État pour le mot de passe.
-   const [rememberMe, setRememberMe] = useState(false); // État pour la case à cocher "se souvenir de moi".
-   const [errorMessage, setErrorMessage] = useState(''); // État pour les erreurs de formulaire.
-   const navigate = useNavigate(); // Fonction de navigation de React Router.
-   const dispatch = useDispatch(); // Fonction pour envoyer des actions Redux.
+   const [email, setEmail] = useState(''); 
+   const [password, setPassword] = useState(''); 
+   const [rememberMe, setRememberMe] = useState(false); 
+   const [errorMessage, setErrorMessage] = useState(''); 
+   const navigate = useNavigate(); 
+   const dispatch = useDispatch(); 
 
    // Fonction appelée lors de la soumission du formulaire.
    const handleSubmit = async (event) => {
-       event.preventDefault(); // Empêche le rechargement de la page par défaut lors de la soumission du formulaire.
+       event.preventDefault(); 
 
        // Validation de l'email.
        if (!isValidEmail(email)) {

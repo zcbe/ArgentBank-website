@@ -23,7 +23,7 @@ const userSlice = createSlice({
       state.userData.username = action.payload; // Met à jour le nom d'utilisateur avec la valeur reçue dans l'action payload
     },
     // Reducer pour gérer la déconnexion de l'utilisateur
-    logout: (state) => {
+    logout: () => {
       return initialState; // Réinitialise l'état de l'utilisateur à l'état initial lors de la déconnexion sans supprimer le nom d'utilisateur du stockage local
     },
   },
